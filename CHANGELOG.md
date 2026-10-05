@@ -1,3 +1,8 @@
+## 0.1.4
+
+- Migrate Android compilation to Flutter built-in Kotlin support.
+- Require Flutter 3.44.0 and Dart 3.12.0 or newer.
+
 ## 0.1.3
 
  - **FIX**: bump rtk-bridge version.

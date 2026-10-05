@@ -2,7 +2,6 @@ group 'io.dyte.flutter'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = "1.8.22"
     repositories {
         google()
         mavenLocal()
@@ -11,7 +10,6 @@ buildscript {
 
     dependencies {
         classpath("com.android.tools.build:gradle:8.13.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
@@ -24,17 +22,12 @@ rootProject.allprojects {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 
 android {
     namespace 'io.dyte.flutter'
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     sourceSets {
@@ -42,15 +35,20 @@ android {
     }
 
     defaultConfig {
+        compileSdk 36
         minSdkVersion 21
         multiDexEnabled true
-        compileSdk 36
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.amazonaws:ivs-player:1.53.0'
     implementation "com.cloudflare.realtimekit:mobile-core-bridge:1.7.2"
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 }
